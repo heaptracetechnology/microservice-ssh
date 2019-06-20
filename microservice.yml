@@ -49,16 +49,16 @@ actions:
       type: object
       contentType: application/json
       properties:
-        standard_output:
+        standardOutput:
           help: Returns output of command executed on server.
           type: string
-        standard_error:
+        standardError:
           help: The error if any occurred.
           type: string
-        return_code:
+        returnCode:
           help: Http status code.
           type: int
 environment:
   PRIVATE_KEY:
     type: string
-    help: The base64 data of SSH private key.
+    help: The base64 data of SSH private key.   

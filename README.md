@@ -1,40 +1,32 @@
-# SSH as a microservice
+# _SSH_ OMG Microservice
+
+[![Open Microservice Guide](https://img.shields.io/badge/OMG%20Enabled-👍-green.svg?)](https://microservice.guide)
+
 An OMG service for SSH, it  is a cryptographic network protocol for operating network services securely over an unsecured network.
 
-[![Open Microservice Guide](https://img.shields.io/badge/OMG-enabled-brightgreen.svg?style=for-the-badge)](https://microservice.guide)
+## Direct usage in [Storyscript](https://storyscript.io/):
 
-## [OMG](hhttps://microservice.guide) CLI
-
-### OMG
-
-* omg validate
+```coffee
+>>> ssh exec command:'ifconfig' username:'username' password:'password' host:'serverHost' port:'portNumber' 
+{"standardOutput":"Output of executed command","standardError":"Failure message if any error occurred","returnCode":"HTTPstatusCode"}
 ```
-omg validate
-```
-* omg build
-```
-omg build
-```
-### Test Service
 
-* Test the service by following OMG commands
+Curious to [learn more](https://docs.storyscript.io/)?
 
-### CLI
+✨🍰✨
 
-##### SSH
-```sh
+## Usage with [OMG CLI](https://www.npmjs.com/package/omg)
+
+##### SSH Execute
+```shell
 $ omg run exec -a command=<COMMAND> -a username=<SERVER_USERNAME> -a password=<SERVER_PASSWORD> -a host=<SSH_HOST> -a port=<PORT_NUMBER> -e PRIVATE_KEY=<PRIVATE_KEY_FILE_BASE64_DATA>
 ```
 
-## License
-### [MIT](https://choosealicense.com/licenses/mit/)
+**Note**: The OMG CLI requires [Docker](https://docs.docker.com/install/) to be installed.
 
-## Docker
-### Build
-```
-docker build -t microservice-ssh .
-```
-### RUN
-```
-docker run -p 3000:3000 microservice-ssh
-```
+## License
+[MIT License](https://github.com/omg-services/awesome/blob/master/LICENSE).
+
+
+
+

@@ -24,9 +24,9 @@ type Message struct {
 }
 
 type Output struct {
-	Output     string `json:"standard_output"`
-	Error      string `json:"standard_error"`
-	ReturnCode int    `json:"return_code"`
+	Output     string `json:"standardOutput"`
+	Error      string `json:"standardError"`
+	ReturnCode int    `json:"returnCode"`
 }
 
 //SSH
