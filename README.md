@@ -1,6 +1,8 @@
 # _SSH_ OMG Microservice
 
 [![Open Microservice Guide](https://img.shields.io/badge/OMG%20Enabled-👍-green.svg?)](https://microservice.guide)
+[![Build Status](https://travis-ci.com/heaptracetechnology/microservice-ssh.svg?branch=master)](https://travis-ci.com/heaptracetechnology/microservice-ssh)
+[![codecov](https://codecov.io/gh/heaptracetechnology/microservice-ssh/branch/master/graph/badge.svg)](https://codecov.io/gh/heaptracetechnology/microservice-ssh)
 
 An OMG service for SSH, it  is a cryptographic network protocol for operating network services securely over an unsecured network.
 
