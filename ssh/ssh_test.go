@@ -11,15 +11,9 @@ import (
 	"os"
 )
 
-var (
-	host       = os.Getenv("SSH_HOST")
-	port       = os.Getenv("SSH_PORT")
-	privateKey = os.Getenv("SSH_PRIVATE_KEY")
-)
-
 var _ = Describe("SSH without private key and password", func() {
 
-	ssh := SSHArguments{Command: "ifconfig", Username: "admin1", Host: host, Port: port}
+	ssh := SSHArguments{Command: "ifconfig", Username: "mockUsername"}
 	requestBody := new(bytes.Buffer)
 	errr := json.NewEncoder(requestBody).Encode(ssh)
 	if errr != nil {
@@ -38,32 +32,6 @@ var _ = Describe("SSH without private key and password", func() {
 		Context("SSH server", func() {
 			It("Should result http.StatusBadRequest", func() {
 				Expect(http.StatusBadRequest).To(Equal(recorder.Code))
-			})
-		})
-	})
-})
-
-var _ = Describe("SSH with password", func() {
-
-	ssh := SSHArguments{Command: "ifconfig", Username: "admin1", Password: "admin", Host: host, Port: port}
-	requestBody := new(bytes.Buffer)
-	errr := json.NewEncoder(requestBody).Encode(ssh)
-	if errr != nil {
-		log.Fatal(errr)
-	}
-
-	request, err := http.NewRequest("POST", "/ssh", requestBody)
-	if err != nil {
-		log.Fatal(err)
-	}
-	recorder := httptest.NewRecorder()
-	handler := http.HandlerFunc(SSH)
-	handler.ServeHTTP(recorder, request)
-
-	Describe("Run command on SSH server", func() {
-		Context("SSH server", func() {
-			It("Should result http.StatusOK", func() {
-				Expect(http.StatusOK).To(Equal(recorder.Code))
 			})
 		})
 	})
@@ -71,8 +39,8 @@ var _ = Describe("SSH with password", func() {
 
 var _ = Describe("SSH with private key and password", func() {
 
-	os.Setenv("PRIVATE_KEY", privateKey)
-	ssh := SSHArguments{Command: "ifconfig", Username: "admin1", Host: host, Password: "admin", Port: port}
+	os.Setenv("PRIVATE_KEY", "mockPrivateKey")
+	ssh := SSHArguments{Command: "ifconfig", Username: "mockUsername", Password: "mockPassword"}
 	requestBody := new(bytes.Buffer)
 	errr := json.NewEncoder(requestBody).Encode(ssh)
 	if errr != nil {
@@ -96,10 +64,10 @@ var _ = Describe("SSH with private key and password", func() {
 	})
 })
 
-var _ = Describe("SSH with private key", func() {
+var _ = Describe("SSH with private key and password", func() {
 
-	os.Setenv("PRIVATE_KEY", privateKey)
-	ssh := SSHArguments{Command: "ifconfig", Username: "admin1", Host: host, Port: port}
+	os.Setenv("PRIVATE_KEY", "")
+	ssh := SSHArguments{Command: "ifconfig", Username: "mockUsername", Password: "mockPassword"}
 	requestBody := new(bytes.Buffer)
 	errr := json.NewEncoder(requestBody).Encode(ssh)
 	if errr != nil {
@@ -116,8 +84,8 @@ var _ = Describe("SSH with private key", func() {
 
 	Describe("Run command on SSH server", func() {
 		Context("SSH server", func() {
-			It("Should result http.StatusOK", func() {
-				Expect(http.StatusOK).To(Equal(recorder.Code))
+			It("Should result http.StatusBadRequest", func() {
+				Expect(http.StatusBadRequest).To(Equal(recorder.Code))
 			})
 		})
 	})
